@@ -45,6 +45,47 @@ def visualizar_distribucion_precipitacion(datos_precipitacion):
 # Interfaz de usuario con Streamlit
 st.title("Calculadora de Probabilidad de Precipitación")
 
+# Explicación de las Fórmulas
+st.header("Explicación de las Fórmulas para el Cálculo de Probabilidades")
+
+st.subheader("1. Probabilidad de que un día tenga una precipitación mayor o igual a un umbral")
+st.markdown(
+    r"""
+    Dado que la precipitación diaria tiene muchos valores en 0, separamos los días con lluvia y ajustamos una distribución Gamma. La probabilidad de que en un día con lluvia la precipitación supere un umbral \( x \) se calcula como:
+    $$ P(X \geq x) = 1 - F(x) $$
+    Donde \( F(x) \) es la función de distribución acumulativa (CDF) de la distribución Gamma:
+    $$ F(x) = \int_{0}^{x} \frac{1}{\Gamma(k) \theta^k} x^{k-1} e^{-x/\theta} dx $$
+    """
+)
+
+st.code("""
+p_x_mayor_umbral = 1 - stats.gamma.cdf(umbral, shape, loc=loc, scale=scale)
+""", language="python")
+
+st.subheader("2. Probabilidad de que en los próximos n días al menos un día tenga una precipitación mayor o igual a un umbral")
+st.markdown(
+    r"""
+    Si la probabilidad de que un día supere el umbral es \( P_d \), la probabilidad de que en \( n \) días al menos un día supere el umbral es:
+    $$ P(\text{al menos un día con } X \geq x) = 1 - (1 - P_d)^n $$
+    """
+)
+
+st.code("""
+p_al_menos_uno_30_dias = 1 - (1 - p_dia_umbral) ** 30
+""", language="python")
+
+st.subheader("3. Cálculo del período de retorno")
+st.markdown(
+    r"""
+    El período de retorno \( T \) representa el intervalo promedio de tiempo entre eventos que superan un umbral de precipitación y se calcula como:
+    $$ T = \frac{1}{P(X \geq x)} $$
+    """
+)
+
+st.code("""
+T = 1 / p_dia_umbral if p_dia_umbral > 0 else np.inf
+""", language="python")
+
 # Cargar datos de precipitación
 datos_precipitacion = load_data()
 

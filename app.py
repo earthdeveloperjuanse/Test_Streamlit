@@ -25,7 +25,7 @@ st.title("Calculadora de Probabilidad de Precipitación")
 datos_precipitacion = load_data()
 
 # Entrada de usuario
-umbral_value = st.slider("Seleccione el umbral de precipitación (mm)", min_value=0, max_value=100, value=30)
+umbral_value = st.slider("Seleccione el umbral de precipitación (mm)", min_value=0, max_value=60, value=30)
 days_value = st.slider("Seleccione el número de días", min_value=1, max_value=365, value=120)
 
 # Calcular probabilidades

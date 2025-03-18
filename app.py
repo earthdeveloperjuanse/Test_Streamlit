@@ -1,10 +1,11 @@
 import streamlit as st
 from arcgis.gis import GIS
 from arcgis.mapping import WebMap
+import os
 
-# Configuración de la API de ArcGIS con tu token de acceso
-api_key = "TU_TOKEN_DE_ACCESO"
-gis = GIS(api_key=api_key)
+CLIENT_USERNAME = os.environ['USERNAME']
+CLIENT_PASSWORD = os.environ['PASSWORD']
+gis = GIS(CLIENT_USERNAME, CLIENT_PASSWORD)
 
 # Buscar el mapa web público
 webmap_search = gis.content.search(

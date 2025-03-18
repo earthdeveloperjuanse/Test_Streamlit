@@ -15,7 +15,7 @@ params = {
 response = requests.get(feature_layer_url, params=params)
 if response.status_code == 200:
     geojson_data = response.json()
-    print(geojson_data)
+    print(response.status_code)
     folium.GeoJson(
         geojson_data,
         tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"]),
@@ -24,4 +24,4 @@ if response.status_code == 200:
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-st_data = st_folium(m)
+st_folium(m, width=2000, height=500, returned_objects=[], debug=True)

@@ -19,6 +19,7 @@ if st.sidebar.button("Buscar"):
     center = [0, 0]  # Ubicación inicial en el centro del mapa
     m = folium.Map(location=center, zoom_start=2)
     feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
+    # Prueba
     where_clause = (
         f"latitude >= {min_lat} AND latitude <= {max_lat} AND longitude >= {max_lon} AND longitude <= {min_lon} AND acq_date >= '{start_date}' AND acq_date <= '{end_date}'"
     )

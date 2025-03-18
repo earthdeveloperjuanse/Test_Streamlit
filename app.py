@@ -30,7 +30,7 @@ if st.sidebar.button("Buscar"):
     # Construir consulta espacial y temporal
     where_clause = (
         f"latitude >= {min_lat} AND latitude <= {max_lat} "
-        f"AND longitude >= {min_lon} AND longitude <= {max_lon} "
+        f"AND longitude >= {max_lon} AND longitude <= {min_lon} "
 #        f"AND acq_date >= '{start_date}' AND acq_date <= '{end_date}'"
     )
     st.info(where_clause)

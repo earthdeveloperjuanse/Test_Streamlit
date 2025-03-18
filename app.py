@@ -40,4 +40,4 @@ if st.sidebar.button("Buscar"):
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-    st_folium(m, width=500, height=500)
+    st_folium(m, width=1500, height=500)

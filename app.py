@@ -55,9 +55,9 @@ if st.sidebar.button("Buscar"):
             # Agregar la capa al mapa
             folium.GeoJson(
                 geojson_data,
-                tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence", "acq_date"],
+                tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence", "acq_date"],
                                              aliases=["Brillo:", "Confianza:", "Fecha:"]),
-                popup=folium.GeoJsonPopup(fields=["brightness", "confidence", "acq_date"],
+                popup=folium.GeoJsonPopup(fields=["bright_ti4", "confidence", "acq_date"],
                                           aliases=["Brillo:", "Confianza:", "Fecha:"])
             ).add_to(m)
         else:

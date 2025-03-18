@@ -45,22 +45,13 @@ if st.sidebar.button("Buscar"):
 
     if response.status_code == 200:
         geojson_data = response.json()
-
-        # Verificar si hay datos en "features"
-        if "features" in geojson_data and len(geojson_data["features"]) > 0:
-            geojson_data["features"] = geojson_data["features"][:100]
-            st.json(geojson_data["features"][0])  # Mostrar el primer objeto encontrado
-
-            # Agregar la capa al mapa
-            folium.GeoJson(
-                geojson_data,
-                tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence", "acq_date"],
-                                             aliases=["Brillo:", "Confianza:", "Fecha:"]),
-                popup=folium.GeoJsonPopup(fields=["bright_ti4", "confidence", "acq_date"],
-                                          aliases=["Brillo:", "Confianza:", "Fecha:"])
-            ).add_to(m)
-        else:
-            st.warning("No se encontraron puntos de calor en el rango especificado.")
+        folium.GeoJson(
+            geojson_data,
+            tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence", "acq_date"],
+                                            aliases=["Brillo:", "Confianza:", "Fecha:"]),
+            popup=folium.GeoJsonPopup(fields=["bright_ti4", "confidence", "acq_date"],
+                                        aliases=["Brillo:", "Confianza:", "Fecha:"])
+        ).add_to(m)
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 

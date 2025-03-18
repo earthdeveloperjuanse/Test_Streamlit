@@ -20,7 +20,7 @@ if st.button("Ingresar"):
 
             # Buscar el mapa web público
             webmap_search = gis.content.search(
-                query="LA Parks and Trails Map (styled) tags:tutorial owner:esri_devlabs",
+                query="North American Power Plants & Renewable Energy Power Plants owner:EsriCanadaContent",
                 item_type="Web Map"
             )
 

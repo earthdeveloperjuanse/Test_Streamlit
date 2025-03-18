@@ -8,10 +8,10 @@ st.title("Mapa de Puntos de Calor con Filtros de Latitud, Longitud y Fecha")
 
 # Parámetros de entrada del usuario
 st.sidebar.header("Definir límites de búsqueda")
-min_lat = st.sidebar.number_input("Latitud mínima", value=-90.0, min_value=-90.0, max_value=90.0)
-max_lat = st.sidebar.number_input("Latitud máxima", value=90.0, min_value=-90.0, max_value=90.0)
-min_lon = st.sidebar.number_input("Longitud mínima", value=-180.0, min_value=-180.0, max_value=180.0)
-max_lon = st.sidebar.number_input("Longitud máxima", value=180.0, min_value=-180.0, max_value=180.0)
+min_lat = st.sidebar.number_input("Latitud mínima", value=0, min_value=-90.0, max_value=90.0)
+max_lat = st.sidebar.number_input("Latitud máxima", value=0, min_value=-90.0, max_value=90.0)
+min_lon = st.sidebar.number_input("Longitud mínima", value=-72, min_value=-180.0, max_value=180.0)
+max_lon = st.sidebar.number_input("Longitud máxima", value=-74, min_value=-180.0, max_value=180.0)
 
 # Intervalo de fechas
 st.sidebar.header("Seleccionar intervalo de fechas")

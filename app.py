@@ -28,18 +28,13 @@ response = requests.get(feature_layer_url, params=params)
 
 if response.status_code == 200:
     geojson_data = response.json()
-
-    # Agregar la capa de Feature Layer a Folium
     folium.GeoJson(
         geojson_data,
         name="Thermal Hotspots",
         tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"]),
         popup=folium.GeoJsonPopup(fields=["brightness", "confidence"])
     ).add_to(m)
-
-    # Agregar control de capas
-    folium.LayerControl().add_to(m)
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-st_data = st_folium(m, width=725)
+st_data = st_folium(m)

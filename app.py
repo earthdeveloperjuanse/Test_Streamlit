@@ -33,7 +33,7 @@ if st.button("Ingresar"):
                 # Mostrar el mapa embebido
                 st.subheader("Mapa de Parques y Senderos de Los Ángeles")
                 st.markdown("Este mapa muestra parques y senderos en Los Ángeles, CA, utilizando la API de ArcGIS para Python.")
-                st.components.v1.iframe(webmap_item.homepage, width=800, height=600)
+                webmap.to_streamlit(height=700)
             else:
                 st.error("No se encontró el mapa web especificado.")
         except Exception as e:

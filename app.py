@@ -20,7 +20,7 @@ if st.button("Ingresar"):
 
             # Buscar el mapa web público
             webmap_search = gis.content.search(
-                query="North American Power Plants & Renewable Energy Power Plants owner:EsriCanadaContent",
+                query="Satellite (MODIS) Thermal",
                 item_type="Web Map"
             )
 

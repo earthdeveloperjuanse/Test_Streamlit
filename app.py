@@ -24,6 +24,7 @@ if st.button("Ingresar"):
                 item_type="Web Map"
             )
 
+            st.success(webmap_search)
             # Verificar si se encontró el mapa
             if webmap_search:
                 webmap_item = webmap_search[0]

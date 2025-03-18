@@ -18,7 +18,6 @@ if response.status_code == 200:
     print(geojson_data)
     folium.GeoJson(
         geojson_data,
-        name="Thermal Hotspots",
         tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"]),
         popup=folium.GeoJsonPopup(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"])
     ).add_to(m)

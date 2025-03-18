@@ -1,7 +1,4 @@
 streamlit
 streamlit-folium
-numpy
-pandas
-scipy
-matplotlib
+datetime
 folium

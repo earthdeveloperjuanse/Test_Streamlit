@@ -41,4 +41,4 @@ if st.sidebar.button("Buscar"):
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
     # Mostrar el mapa en Streamlit
-    st_folium(m, width=1500, height=500)
+    st_folium(m, width=500, height=500)

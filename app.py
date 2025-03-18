@@ -37,6 +37,6 @@ if st.button("Ingresar"):
             else:
                 st.error("No se encontró el mapa web especificado.")
         except Exception as e:
-            st.error("Error de autenticación. Por favor, verifique sus credenciales.")
+            st.error(f"Error de autenticación. Por favor, verifique sus credenciales. {e}")
     else:
         st.warning("Por favor, ingrese tanto el nombre de usuario como la contraseña.")

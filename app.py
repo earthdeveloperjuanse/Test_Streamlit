@@ -22,15 +22,14 @@ end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
 if st.sidebar.button("Buscar"):
     # Ubicación inicial en el centro del mapa
     center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
-    m = folium.Map(location=center, zoom_start=3)
+    m = folium.Map(location=center, zoom_start=10)
 
     # URL del Feature Layer en Esri
     feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
 
     # Construir consulta espacial y temporal
     where_clause = (
-        f"latitude >= {min_lat} AND latitude <= {max_lat} "
-        f"AND longitude >= {max_lon} AND longitude <= {min_lon} "
+        f"latitude >= {min_lat} AND latitude <= {max_lat} AND longitude >= {max_lon} AND longitude <= {min_lon} "
 #        f"AND acq_date >= '{start_date}' AND acq_date <= '{end_date}'"
     )
     st.info(where_clause)

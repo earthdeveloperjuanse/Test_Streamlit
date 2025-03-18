@@ -33,7 +33,7 @@ if st.sidebar.button("Buscar"):
         f"AND longitude >= {min_lon} AND longitude <= {max_lon} "
         f"AND acq_date >= '{start_date}' AND acq_date <= '{end_date}'"
     )
-
+    st.info(where_clause)
     params = {
         "where": where_clause,
         "outFields": "latitude,longitude,brightness,confidence,acq_date",

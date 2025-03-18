@@ -2,7 +2,7 @@ import folium
 import streamlit as st
 import requests
 from streamlit_folium import st_folium
-from streamlit_folium import folium_static
+
 
 # Configurar la aplicación de Streamlit
 st.title("Mapa con Capa de Living Atlas de Esri")
@@ -42,4 +42,4 @@ if response.status_code == 200:
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-folium_static(m, width=800, height=500)
+m

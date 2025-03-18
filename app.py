@@ -17,25 +17,8 @@ if st.button("Ingresar"):
             # Autenticarse en GIS
             gis = GIS("https://www.arcgis.com", username, password)
             st.success(f"Bienvenido, {username}!")
-
-            # Buscar el mapa web público
-            webmap_search = gis.content.search(
-                query="Satellite (MODIS) Thermal",
-                item_type="Web Map"
-            )
-
-            st.success(webmap_search)
-            # Verificar si se encontró el mapa
-            if webmap_search:
-                webmap_item = webmap_search[0]
-                webmap = WebMap(webmap_item)
-
-                # Mostrar el mapa embebido
-                st.subheader("Mapa de Parques y Senderos de Los Ángeles")
-                st.markdown("Este mapa muestra parques y senderos en Los Ángeles, CA, utilizando la API de ArcGIS para Python.")
-                webmap.to_streamlit(height=700)
-            else:
-                st.error("No se encontró el mapa web especificado.")
+            map = gis.map('Paris')
+            map.to_streamlit(height=700)
         except Exception as e:
             st.error(f"Error de autenticación. Por favor, verifique sus credenciales. {e}")
     else:

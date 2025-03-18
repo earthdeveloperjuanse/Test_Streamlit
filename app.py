@@ -16,8 +16,8 @@ start_date = st.sidebar.date_input("Fecha de inicio", datetime(2024, 1, 1))
 end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
 
 if st.sidebar.button("Buscar"):
-    center = [0, 0]  # Ubicación inicial en el centro del mapa
-    m = folium.Map(location=center, zoom_start=2)
+    center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
+    m = folium.Map(location=center, zoom_start=5)
     feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
     # Prueba
     where_clause = (
@@ -40,5 +40,5 @@ if st.sidebar.button("Buscar"):
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-    # Mostrar el mapa en Streamlit
+    folium.TileLayer("Stamen Terrain").add_to(m)
     st_folium(m, width=500, height=500)

@@ -2,7 +2,8 @@ import folium
 import streamlit as st
 import requests
 from streamlit_folium import st_folium
-import datetime
+from datetime import datetime
+
 
 st.title("Mapa con Capa de Living Atlas de Esri")
 

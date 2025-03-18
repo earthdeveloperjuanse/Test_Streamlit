@@ -1,0 +1,8 @@
+name: Test
+
+on:
+  workflow_dispath:
+
+env:
+  CLIENT_USERNAME: ${{secrets.USERNAME}}
+  CLIENT_PASSWORD: ${{secrets.PASSWORD}}

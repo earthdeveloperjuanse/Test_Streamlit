@@ -42,4 +42,4 @@ if response.status_code == 200:
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-m
+st_data = st_folium(m, width=725)

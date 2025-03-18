@@ -5,10 +5,10 @@ from streamlit_folium import st_folium
 from datetime import datetime
 
 st.title("Mapa con Capa de Living Atlas de Esri")
-min_lat = st.sidebar.number_input("Latitud mínima", value=0, min_value=-90.0, max_value=90.0)
-max_lat = st.sidebar.number_input("Latitud máxima", value=4, min_value=-90.0, max_value=90.0)
-min_lon = st.sidebar.number_input("Longitud mínima", value=-72, min_value=-180.0, max_value=180.0)
-max_lon = st.sidebar.number_input("Longitud máxima", value=-74, min_value=-180.0, max_value=180.0)
+min_lat = st.sidebar.number_input("Latitud mínima", value=0.0, min_value=-90.0, max_value=90.0)
+max_lat = st.sidebar.number_input("Latitud máxima", value=4.0, min_value=-90.0, max_value=90.0)
+min_lon = st.sidebar.number_input("Longitud mínima", value=-72.0, min_value=-180.0, max_value=180.0)
+max_lon = st.sidebar.number_input("Longitud máxima", value=-74.0, min_value=-180.0, max_value=180.0)
 
 # Intervalo de fechas
 st.sidebar.header("Seleccionar intervalo de fechas")

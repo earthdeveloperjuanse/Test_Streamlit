@@ -15,7 +15,7 @@ params = {
 response = requests.get(feature_layer_url, params=params)
 if response.status_code == 200:
     geojson_data = response.json()
-    st.info(geojson_data)
+    st.info(response.json())
     folium.GeoJson(
         geojson_data,
         tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"]),

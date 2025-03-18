@@ -28,7 +28,7 @@ response = requests.get(feature_layer_url, params=params)
 
 if response.status_code == 200:
     geojson_data = response.json()
-    print(geojson_data[0])
+    print(geojson_data)
     folium.GeoJson(
         geojson_data,
         name="Thermal Hotspots",

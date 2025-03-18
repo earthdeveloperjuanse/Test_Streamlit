@@ -2,58 +2,48 @@ import folium
 import streamlit as st
 import requests
 from streamlit_folium import st_folium
-from datetime import datetime
 
-st.title("Mapa de Puntos de Calor con Filtros de Latitud, Longitud y Fecha")
+st.title("Mapa con Capa de Living Atlas de Esri")
 
-# Parámetros de entrada del usuario
-st.sidebar.header("Definir límites de búsqueda")
-min_lat = st.sidebar.number_input("Latitud mínima", value=0.0, min_value=-90.0, max_value=90.0)
-max_lat = st.sidebar.number_input("Latitud máxima", value=0.0, min_value=-90.0, max_value=90.0)
-min_lon = st.sidebar.number_input("Longitud mínima", value=-72.0, min_value=-180.0, max_value=180.0)
-max_lon = st.sidebar.number_input("Longitud máxima", value=-74.0, min_value=-180.0, max_value=180.0)
+# Ubicación inicial en el centro del mapa
+center = [0, 0]  
+m = folium.Map(location=center, zoom_start=2)
 
-# Intervalo de fechas
-st.sidebar.header("Seleccionar intervalo de fechas")
-start_date = st.sidebar.date_input("Fecha de inicio", datetime(2024, 1, 1))
-end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
+# URL del Feature Layer en Esri
+feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
 
-# Botón de búsqueda
-if st.sidebar.button("Buscar"):
-    # Ubicación inicial en el centro del mapa
-    center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
-    m = folium.Map(location=center, zoom_start=10)
+# Parámetros para obtener los datos en formato GeoJSON
+params = {
+    "where": "1=1",  # Obtener todas las entidades
+    "outFields": "*",  # Obtener todos los atributos
+    "f": "geojson",  # Formato de salida en GeoJSON
+    "resultRecordCount": 100  # Límite de 100 registros
+}
 
-    # URL del Feature Layer en Esri
-    feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
+# Hacer la solicitud a la API de ArcGIS
+response = requests.get(feature_layer_url, params=params)
 
-    # Construir consulta espacial y temporal
-    where_clause = (
-        f"latitude >= {min_lat} AND latitude <= {max_lat} AND longitude >= {max_lon} AND longitude <= {min_lon} "
-#        f"AND acq_date >= '{start_date}' AND acq_date <= '{end_date}'"
-    )
-    st.info(where_clause)
-    params = {
-        "where": where_clause,
-        "outFields": "latitude,longitude,brightness,confidence,acq_date",
-        "f": "geojson",  # Formato GeoJSON
-        "resultRecordCount": 100  # Límite de registros
-    }
+if response.status_code == 200:
+    geojson_data = response.json()
 
-    # Hacer la solicitud a la API de ArcGIS
-    response = requests.get(feature_layer_url, params=params)
+    # Verificar si hay datos en "features"
+    if "features" in geojson_data and len(geojson_data["features"]) > 0:
+        # Tomar solo los primeros 100 elementos
+        geojson_data["features"] = geojson_data["features"][:100]
 
-    if response.status_code == 200:
-        geojson_data = response.json()
+        # Mostrar solo el primer objeto en Streamlit
+#        st.json(geojson_data["features"][0])
+
+        # Agregar la capa al mapa
         folium.GeoJson(
             geojson_data,
-            tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence", "acq_date"],
-                                            aliases=["Brillo:", "Confianza:", "Fecha:"]),
-            popup=folium.GeoJsonPopup(fields=["bright_ti4", "confidence", "acq_date"],
-                                        aliases=["Brillo:", "Confianza:", "Fecha:"])
+            tooltip=folium.GeoJsonTooltip(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"]),
+            popup=folium.GeoJsonPopup(fields=["brightness", "confidence"], aliases=["Brillo:", "Confianza:"])
         ).add_to(m)
     else:
-        st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
+        st.warning("No se encontraron características en la respuesta de la API.")
+else:
+    st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-    # Mostrar el mapa en Streamlit
-    st_folium(m, width=900, height=500)
+# Mostrar el mapa en Streamlit
+st_folium(m, width=800, height=500, returned_objects=[], debug=True)

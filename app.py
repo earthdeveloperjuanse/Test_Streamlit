@@ -41,4 +41,4 @@ if response.status_code == 200:
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-m.to_streamlit(height=700)
+st_folium(m, width=800, height=500)

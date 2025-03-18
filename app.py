@@ -3,9 +3,15 @@ from arcgis.gis import GIS
 from arcgis.mapping import WebMap
 import os
 
-CLIENT_USERNAME = os.environ['USERNAME']
-CLIENT_PASSWORD = os.environ['PASSWORD']
-gis = GIS(CLIENT_USERNAME, CLIENT_PASSWORD)
+CLIENT_USERNAME = os.environ.get('USERNAME')
+CLIENT_PASSWORD = os.environ.get('PASSWORD')
+
+# Verificar que las variables de entorno no estén vacías
+if not CLIENT_USERNAME or not CLIENT_PASSWORD:
+    raise ValueError("Las credenciales no están definidas en las variables de entorno.")
+
+# Autenticarse en GIS
+gis = GIS("https://www.arcgis.com", CLIENT_USERNAME, CLIENT_PASSWORD)
 
 # Buscar el mapa web público
 webmap_search = gis.content.search(

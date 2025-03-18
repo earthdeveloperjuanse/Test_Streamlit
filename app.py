@@ -10,7 +10,8 @@ feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/s
 params = {
     "where": "1=1",  # Obtener todas las entidades
     "outFields": "*",  # Obtener todos los atributos
-    "f": "geojson"  # Formato de salida en GeoJSON
+    "f": "geojson",  # Formato de salida en GeoJSON
+    "resultRecordCount": 100  # Límite de 100 registros
 }
 response = requests.get(feature_layer_url, params=params)
 if response.status_code == 200:
@@ -22,7 +23,6 @@ if response.status_code == 200:
         st.json(first_feature)  # Mostrar el primer objeto en formato JSON
         
         # Agregar la capa al mapa
-
         folium.GeoJson(
             geojson_data,
             tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence"], aliases=["Brillo:", "Confianza:"]),

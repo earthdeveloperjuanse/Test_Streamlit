@@ -40,5 +40,4 @@ if st.sidebar.button("Buscar"):
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-    folium.TileLayer("Stamen Terrain").add_to(m)
     st_folium(m, width=500, height=500)

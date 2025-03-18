@@ -11,7 +11,7 @@ params = {
     "where": "1=1",  # Obtener todas las entidades
     "outFields": "*",  # Obtener todos los atributos
     "f": "geojson",  # Formato de salida en GeoJSON
-    "resultRecordCount": 30  # Límite de 100 registros
+    "resultRecordCount": 300  # Límite de 100 registros
 }
 response = requests.get(feature_layer_url, params=params)
 if response.status_code == 200:

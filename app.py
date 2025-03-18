@@ -15,9 +15,6 @@ st.sidebar.header("Seleccionar intervalo de fechas")
 start_date = st.sidebar.date_input("Fecha de inicio", datetime(2024, 1, 1))
 end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
 
-def callback():
-    st.toast(f"Current zoom: {st.session_state['my_map']['zoom']}")
-    st.toast(f"Current center: {st.session_state['my_map']['center']}")
 
 if st.sidebar.button("Buscar"):
     center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
@@ -44,4 +41,4 @@ if st.sidebar.button("Buscar"):
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-    st_folium(m, width=1500, height=500, on_change=callback)
+    st_folium(m, width=1500, height=500)

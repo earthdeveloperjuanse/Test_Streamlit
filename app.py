@@ -30,7 +30,7 @@ if st.sidebar.button("Buscar"):
 
     params = {
         "where": where_clause,
-        "outFields": "latitude,longitude,brightness,confidence,acq_date",
+        "outFields": "latitude,longitude,bright_ti4,confidence,acq_date",
         "f": "geojson",  # Formato GeoJSON
         "resultRecordCount": 100  # Límite de registros
     }

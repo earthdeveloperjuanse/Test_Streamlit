@@ -41,5 +41,4 @@ if response.status_code == 200:
 else:
     st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
-# Mostrar el mapa en Streamlit
-st_folium(m, width=800, height=500)
+m.to_streamlit(height=700)

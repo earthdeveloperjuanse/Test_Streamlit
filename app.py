@@ -25,7 +25,7 @@ end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
 if st.sidebar.button("Buscar"):
     st.session_state.search_clicked = True
 
-center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
+center = [4.651027, -74.100723]
 m = folium.Map(location=center, zoom_start=5)
 
 if st.session_state.search_clicked:

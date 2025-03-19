@@ -43,7 +43,7 @@ def visualizar_distribucion_precipitacion(datos_precipitacion):
     return fig
 
 # Interfaz de usuario con Streamlit
-st.title("Calculadora de Probabilidad de Precipitación")
+st.title("Calculadora de Probabilidad de Precipitación - Histórico Quebrada La Iguaná")
 
 # Explicación de las Fórmulas
 st.header("Explicación de las Fórmulas para el Cálculo de Probabilidades")

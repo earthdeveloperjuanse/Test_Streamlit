@@ -50,11 +50,11 @@ if st.session_state.search_clicked:
         geojson_data = response.json()
 
         def get_color(brightness):
-            if brightness < 330:
+            if brightness < 150:
                 return "blue"
-            elif brightness < 360:
+            elif brightness < 250:
                 return "green"
-            elif brightness < 390:
+            elif brightness < 350:
                 return "orange"
             else:
                 return "red"
@@ -75,7 +75,7 @@ if st.session_state.search_clicked:
                 fill_opacity=0.7,
                 popup=f"Brillo: {brightness}"
             ).add_to(m)
-            
+
             if bounds:
                 m.fit_bounds(bounds)
         '''    

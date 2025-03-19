@@ -4,7 +4,7 @@ import requests
 from streamlit_folium import st_folium
 from datetime import datetime
 
-st.title("Mapa con Capa de Living Atlas de Esri")
+st.title("Puntos de calor VIIRS - Servicio Esri")
 min_lat = st.sidebar.number_input("Latitud mínima", value=0.0, min_value=-90.0, max_value=90.0)
 max_lat = st.sidebar.number_input("Latitud máxima", value=4.0, min_value=-90.0, max_value=90.0)
 min_lon = st.sidebar.number_input("Longitud mínima", value=-72.0, min_value=-180.0, max_value=180.0)

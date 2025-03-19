@@ -58,12 +58,13 @@ if st.session_state.search_clicked:
                 return "orange"
             else:
                 return "red"
-        
+        bounds = []
         for feature in geojson_data["features"]:
             lat = feature["geometry"]["coordinates"][1]
             lon = feature["geometry"]["coordinates"][0]
             brightness = feature["properties"].get("bright_ti4", 0)
             color = get_color(brightness)
+            bounds.append([lat, lon])
             
             folium.CircleMarker(
                 location=[lat, lon],
@@ -74,6 +75,9 @@ if st.session_state.search_clicked:
                 fill_opacity=0.7,
                 popup=f"Brillo: {brightness}"
             ).add_to(m)
+            
+            if bounds:
+                m.fit_bounds(bounds)
         '''    
         folium.GeoJson(
             geojson_data,

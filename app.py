@@ -15,10 +15,10 @@ st.sidebar.header("Seleccionar intervalo de fechas")
 start_date = st.sidebar.date_input("Fecha de inicio", datetime(2024, 1, 1))
 end_date = st.sidebar.date_input("Fecha de fin", datetime.today())
 
+center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
+m = folium.Map(location=center, zoom_start=5)
 
 if st.sidebar.button("Buscar"):
-    center = [(min_lat + max_lat) / 2, (min_lon + max_lon) / 2]
-    m = folium.Map(location=center, zoom_start=5)
     feature_layer_url = "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Satellite_VIIRS_Thermal_Hotspots_and_Fire_Activity/FeatureServer/0/query"
     # Prueba
     where_clause = (

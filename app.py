@@ -4,7 +4,7 @@ import requests
 from streamlit_folium import st_folium
 from datetime import datetime
 
-st.title("Mapa con Capa de Living Atlas de Esri")
+st.title("Mapa de puntos de calor - Servicio Esri")
 
 # Crear un estado en la sesión para evitar validaciones constantes del botón
 if 'search_clicked' not in st.session_state:
@@ -48,13 +48,40 @@ if st.session_state.search_clicked:
     response = requests.get(feature_layer_url, params=params)
     if response.status_code == 200:
         geojson_data = response.json()
+
+        def get_color(brightness):
+            if brightness < 330:
+                return "blue"
+            elif brightness < 360:
+                return "green"
+            elif brightness < 390:
+                return "orange"
+            else:
+                return "red"
+        
+        for feature in geojson_data["features"]:
+            lat = feature["geometry"]["coordinates"][1]
+            lon = feature["geometry"]["coordinates"][0]
+            brightness = feature["properties"].get("bright_ti4", 0)
+            color = get_color(brightness)
+            
+            folium.CircleMarker(
+                location=[lat, lon],
+                radius=5,
+                color=color,
+                fill=True,
+                fill_color=color,
+                fill_opacity=0.7,
+                popup=f"Brillo: {brightness}"
+            ).add_to(m)
+        '''    
         folium.GeoJson(
             geojson_data,
             tooltip=folium.GeoJsonTooltip(fields=["bright_ti4", "confidence", "acq_date"],
                                             aliases=["Brillo:", "Confianza:", "Fecha:"]),
             popup=folium.GeoJsonPopup(fields=["bright_ti4", "confidence", "acq_date"],
                                         aliases=["Brillo:", "Confianza:", "Fecha:"])
-        ).add_to(m)
+        ).add_to(m)'''
     else:
         st.error("No se pudo cargar la capa. Verifica la URL del Feature Layer.")
 
